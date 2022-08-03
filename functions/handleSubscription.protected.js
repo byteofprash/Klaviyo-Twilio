@@ -17,7 +17,7 @@ exports.handler = function(context, event, callback) {
     }
 
     var data = qs.stringify({
-      'data': `{"token": "${context.KLAVIYO_PUBLIC_API_KEY}", "event": "${eventName}", "customer_properties": {"$phone_number": "${event.From}"}, "properties": {"mode":"${mode}"}}`
+      'data': `{"token": "${context.KLAVIYO_PUBLIC_API_KEY}", "event": "${eventName}", "customer_properties": {"$phone_number": "${event.From.replace('whatsapp:','')}"}, "properties": {"mode":"${mode}"}}`
     });
     var config = {
       method: 'post',
