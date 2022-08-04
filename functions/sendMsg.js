@@ -3,7 +3,6 @@ exports.handler = function(context, event, callback) {
 
   // Query parameters or values sent in a POST body can be accessed from `event`
   const from = event.From;
-  const msgServiceSid = event.msgServiceSid;
   const to = event.To;
   const body = event.message;
   console.log(from, to, body, client)
@@ -12,7 +11,7 @@ exports.handler = function(context, event, callback) {
   // and `catch` to properly handle the promise and call `callback` _after_ the
   // message is sent successfully!
   client.messages
-    .create({ body: body, to: to, messagingServiceSid: msgServiceSid})
+    .create({ body, to, from })
     .then((message) => {
       console.log(message.sid);
       return callback(null, `Success! Message SID: ${message.sid}`);
